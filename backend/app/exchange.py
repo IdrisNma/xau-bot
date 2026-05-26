@@ -113,7 +113,7 @@ class Exchange:
             total = bal.get("total", {}).get("USDT") or bal.get("USDT", {}).get("total")
             return float(total or 0.0)
         except Exception as e:  # noqa: BLE001
-            logs.error(f"fetch_balance failed: {e}")
+            logs.error(f"fetch_balance failed: {type(e).__name__}: {e!r}")
             return 0.0
 
     def fetch_position(self) -> dict[str, Any] | None:
