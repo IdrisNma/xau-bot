@@ -35,7 +35,7 @@ class Settings(BaseSettings):
 
     # API
     api_bearer_token: str = "change-me-please"
-    cors_origins: str = "http://localhost:3000"
+    cors_origins: str = "http://localhost:3100"
 
     # Storage
     database_url: str = "sqlite:///./xau_bot.db"

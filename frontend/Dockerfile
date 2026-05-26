@@ -14,4 +14,4 @@ WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=build /app ./
 EXPOSE 3100
-CMD ["npm", "start"]
+CMD npx next start -p ${PORT:-3100}
