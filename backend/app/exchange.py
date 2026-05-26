@@ -1,11 +1,9 @@
-"""Binance USDT-M Futures adapter (ccxt). Testnet-aware. Paper-mode fallback.
+"""Binance USDT-M Futures adapter (ccxt). Demo-trading-aware. Paper-mode fallback.
 
 Modes (auto-detected):
-- **paper**: no API key configured → no exchange-side account calls; orders are
-  simulated locally using public OHLCV/ticker data. Lets you run the full
-  dashboard without any Binance credentials.
-- **testnet**: ``BINANCE_TESTNET=true`` with valid testnet keys → real orders
-  on Binance Futures Testnet.
+- **paper**: no API key configured → orders simulated locally using public data.
+- **demo**: ``BINANCE_TESTNET=true`` with valid keys from your real Binance account
+  (Futures → Demo Trading → Generate Key) → uses ccxt demoTrading option.
 - **live**: ``BINANCE_TESTNET=false`` AND ``LIVE_ENABLED=true`` AND valid keys.
   Otherwise order placement is short-circuited.
 """
@@ -30,16 +28,17 @@ class Exchange:
         self.settings = s
         self.symbol = s.symbol
         self.paper = not (s.binance_api_key and s.binance_api_secret)
+        options: dict = {"defaultType": "future"}
+        if s.binance_testnet and not self.paper:
+            options["demoTrading"] = True
         self.client = ccxt.binanceusdm(
             {
                 "apiKey": s.binance_api_key,
                 "secret": s.binance_api_secret,
                 "enableRateLimit": True,
-                "options": {"defaultType": "future"},
+                "options": options,
             }
         )
-        if s.binance_testnet and not self.paper:
-            self.client.set_sandbox_mode(True)
 
         # Paper-mode local state
         self._paper_balance = 100.0
