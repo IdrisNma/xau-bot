@@ -35,7 +35,17 @@ class TradingEngine:
     # ---- lifecycle -----------------------------------------------------
     async def start(self, strategy_name: str | None = None) -> None:
         if self._task and not self._task.done():
-            logs.info("Engine already running.")
+            # Engine task already alive — just resync DB in case it drifted.
+            with Session(engine) as s:
+                cfg = s.get(BotConfig, 1)
+                if cfg and cfg.status != "running":
+                    cfg.status = "running"
+                    cfg.paused_reason = None
+                    s.add(cfg)
+                    s.commit()
+                    logs.info("Engine already running. Resynced DB status.")
+                else:
+                    logs.info("Engine already running.")
             return
         if strategy_name:
             self.strategy = build_strategy(strategy_name)
