@@ -9,6 +9,7 @@ Modes (auto-detected):
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
 from typing import Any, Optional
 
@@ -19,6 +20,19 @@ from .settings import get_settings
 
 
 _PAPER_STATE_FILE = Path("paper_state.json")
+
+
+def _retry(fn, *, attempts: int = 3, backoff: float = 1.5):
+    """Retry a callable on transient ccxt network errors."""
+    last_exc = None
+    for i in range(attempts):
+        try:
+            return fn()
+        except (ccxt.RequestTimeout, ccxt.NetworkError, ccxt.ExchangeNotAvailable) as e:
+            last_exc = e
+            if i < attempts - 1:
+                time.sleep(backoff ** i)
+    raise last_exc  # type: ignore[misc]
 
 
 class Exchange:
@@ -33,6 +47,7 @@ class Exchange:
                 "secret": s.bitget_api_secret,
                 "password": s.bitget_passphrase,
                 "enableRateLimit": True,
+                "timeout": 30000,
                 "options": {"defaultType": "swap"},
             }
         )
@@ -109,7 +124,7 @@ class Exchange:
         if self.paper:
             return self._paper_balance
         try:
-            bal = self.client.fetch_balance()
+            bal = _retry(self.client.fetch_balance)
             total = bal.get("total", {}).get("USDT") or bal.get("USDT", {}).get("total")
             return float(total or 0.0)
         except Exception as e:  # noqa: BLE001
@@ -120,13 +135,13 @@ class Exchange:
         if self.paper:
             return self._paper_position
         try:
-            positions = self.client.fetch_positions([self.symbol])
+            positions = _retry(lambda: self.client.fetch_positions([self.symbol]))
             for p in positions:
                 contracts = float(p.get("contracts") or 0)
                 if contracts != 0:
                     return p
         except Exception as e:  # noqa: BLE001
-            logs.error(f"fetch_positions failed: {e}")
+            logs.error(f"fetch_positions failed: {type(e).__name__}: {e!r}")
         return None
 
     # ---- orders --------------------------------------------------------
