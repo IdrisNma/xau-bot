@@ -1,10 +1,9 @@
-"""Binance USDT-M Futures adapter (ccxt). Demo-trading-aware. Paper-mode fallback.
+"""Bitget USDT-M Futures adapter (ccxt). Testnet-aware. Paper-mode fallback.
 
 Modes (auto-detected):
-- **paper**: no API key configured → orders simulated locally using public data.
-- **demo**: ``BINANCE_TESTNET=true`` with valid keys from your real Binance account
-  (Futures → Demo Trading → Generate Key) → uses ccxt demoTrading option.
-- **live**: ``BINANCE_TESTNET=false`` AND ``LIVE_ENABLED=true`` AND valid keys.
+- **paper**: no API credentials → orders simulated locally using public data.
+- **testnet**: ``BITGET_TESTNET=true`` with valid testnet keys → Bitget sandbox.
+- **live**: ``BITGET_TESTNET=false`` AND ``LIVE_ENABLED=true`` AND valid keys.
   Otherwise order placement is short-circuited.
 """
 from __future__ import annotations
@@ -27,18 +26,18 @@ class Exchange:
         s = get_settings()
         self.settings = s
         self.symbol = s.symbol
-        self.paper = not (s.binance_api_key and s.binance_api_secret)
-        options: dict = {"defaultType": "future"}
-        if s.binance_testnet and not self.paper:
-            options["demoTrading"] = True
-        self.client = ccxt.binanceusdm(
+        self.paper = not (s.bitget_api_key and s.bitget_api_secret and s.bitget_passphrase)
+        self.client = ccxt.bitget(
             {
-                "apiKey": s.binance_api_key,
-                "secret": s.binance_api_secret,
+                "apiKey": s.bitget_api_key,
+                "secret": s.bitget_api_secret,
+                "password": s.bitget_passphrase,
                 "enableRateLimit": True,
-                "options": options,
+                "options": {"defaultType": "swap"},
             }
         )
+        if s.bitget_testnet and not self.paper:
+            self.client.set_sandbox_mode(True)
 
         # Paper-mode local state
         self._paper_balance = 100.0
@@ -52,6 +51,9 @@ class Exchange:
                 f"Running in PAPER mode (no API keys). Balance=${self._paper_balance:.2f}. "
                 "Orders are simulated locally."
             )
+        else:
+            mode = "TESTNET" if s.bitget_testnet else "LIVE"
+            logs.info(f"Exchange: Bitget USDT-M Futures [{mode}]")
 
     # ---- paper persistence ---------------------------------------------
     def _load_paper_state(self) -> None:
@@ -131,7 +133,7 @@ class Exchange:
     def _live_allowed(self) -> bool:
         if self.paper:
             return True
-        if not self.settings.live_enabled and not self.settings.binance_testnet:
+        if not self.settings.live_enabled and not self.settings.bitget_testnet:
             logs.info("LIVE_ENABLED=false and not on testnet → skipping order placement.")
             return False
         return True
@@ -160,8 +162,8 @@ class Exchange:
             return {"id": "paper-sl", "stopPrice": stop_price}
         opposite = "sell" if side.upper() == "BUY" else "buy"
         return self.client.create_order(
-            self.symbol, "STOP_MARKET", opposite, qty, None,
-            {"stopPrice": stop_price, "reduceOnly": True, "workingType": "MARK_PRICE"},
+            self.symbol, "stop", opposite, qty, None,
+            {"stopPrice": stop_price, "reduceOnly": True, "triggerType": "mark_price"},
         )
 
     def take_profit(self, side: str, qty: float, tp_price: float) -> dict[str, Any] | None:
@@ -173,8 +175,8 @@ class Exchange:
             return {"id": "paper-tp", "stopPrice": tp_price}
         opposite = "sell" if side.upper() == "BUY" else "buy"
         return self.client.create_order(
-            self.symbol, "TAKE_PROFIT_MARKET", opposite, qty, None,
-            {"stopPrice": tp_price, "reduceOnly": True, "workingType": "MARK_PRICE"},
+            self.symbol, "take_profit", opposite, qty, None,
+            {"stopPrice": tp_price, "reduceOnly": True, "triggerType": "mark_price"},
         )
 
     def flatten(self) -> None:
@@ -202,8 +204,6 @@ class Exchange:
 
     # ---- paper helpers -------------------------------------------------
     def paper_check_brackets(self) -> Optional[float]:
-        """If a paper position's SL or TP was hit by current price, settle and
-        return exit price. Otherwise return None."""
         if not self.paper or self._paper_position is None:
             return None
         try:
