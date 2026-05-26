@@ -35,7 +35,7 @@ def get_bot():
             "starting_equity": cfg.starting_equity,
             "paused_reason": cfg.paused_reason,
             "symbol": get_settings().symbol,
-            "testnet": get_settings().binance_testnet,
+            "testnet": get_settings().bitget_testnet,
             "live_enabled": get_settings().live_enabled,
             "strategies": list(PRESETS.keys()),
         }
