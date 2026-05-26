@@ -34,7 +34,7 @@ def create_app() -> FastAPI:
 
     @app.get("/health")
     def health():
-        return {"ok": True, "symbol": s.symbol, "testnet": s.binance_testnet}
+        return {"ok": True, "symbol": s.symbol, "testnet": s.bitget_testnet}
 
     return app
 
