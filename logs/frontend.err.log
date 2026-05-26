@@ -1,0 +1,9 @@
+ ⨯ ./components/ControlBar.tsx
+Error: Failed to read source code from /Users/idrismuhammad/New Bot /frontend/components/ControlBar.tsx
+
+Caused by:
+    No such file or directory (os error 2)
+
+Import trace for requested module:
+./components/ControlBar.tsx
+./app/page.tsx

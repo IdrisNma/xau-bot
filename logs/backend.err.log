@@ -1,0 +1,1113 @@
+INFO:     Started server process [10178]
+INFO:     Waiting for application startup.
+2026-05-26 04:52:27.719 | INFO     | backend.app.logs:emit:44 - [INFO] API ready.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:61963 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:61981 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:61995 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:61999 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+INFO:     Started server process [11957]
+INFO:     Waiting for application startup.
+2026-05-26 04:57:01.896 | INFO     | backend.app.logs:emit:44 - [INFO] API ready.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:62098 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:62118 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:62121 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 04:57:27.651 | INFO     | backend.app.logs:emit:44 - [INFO] Running in PAPER mode (no API keys). Orders are simulated locally.
+2026-05-26 04:57:27.659 | INFO     | backend.app.logs:emit:44 - [INFO] Engine starting [balanced] on XAU/USDT:USDT
+2026-05-26 04:57:27.661 | INFO     | backend.app.logs:emit:44 - [INFO] [paper] skipping set_leverage / set_margin_mode (symbol=XAU/USDT:USDT)
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+INFO:     Started server process [12760]
+INFO:     Waiting for application startup.
+2026-05-26 04:58:27.895 | INFO     | backend.app.logs:emit:44 - [INFO] API ready.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:62155 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection closed
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 317, in asgi_send
+    await self.send(data)  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 618, in send
+    await self.ensure_open()
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 916, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 86, in send
+    await self._send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 39, in sender
+    await send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 330, in asgi_send
+    raise ClientDisconnected from exc
+uvicorn.protocols.utils.ClientDisconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 239, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 80, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 350, in handle
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 160, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 157, in app
+    await func(session)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 764, in app
+    await dependant.call(**solved_result.values)
+  File "/Users/idrismuhammad/New Bot /backend/app/api.py", line 126, in ws
+    await websocket.send_json({"type": "log", "data": entry})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 176, in send_json
+    await self.send({"type": "websocket.send", "text": text})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 89, in send
+    raise WebSocketDisconnect(code=1006)
+starlette.websockets.WebSocketDisconnect
+INFO:     127.0.0.1:62158 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 04:58:46.095 | INFO     | backend.app.logs:emit:44 - [INFO] Running in PAPER mode (no API keys). Orders are simulated locally.
+2026-05-26 04:58:46.102 | INFO     | backend.app.logs:emit:44 - [INFO] Engine starting [balanced] on XAU/USDT:USDT
+2026-05-26 04:58:46.103 | INFO     | backend.app.logs:emit:44 - [INFO] [paper] skipping set_leverage / set_margin_mode (symbol=XAU/USDT:USDT)
+2026-05-26 04:58:48.539 | INFO     | backend.app.logs:emit:44 - [INFO] Engine already running.
+2026-05-26 05:00:02.994 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:00:02.996 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA9=4544.22 EMA21=4543.03 RSI=55.2 ATR=2.89
+2026-05-26 05:00:02.997 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:00:02.998 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:00:03.000 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+INFO:     connection closed
+INFO:     127.0.0.1:62184 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection closed
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 317, in asgi_send
+    await self.send(data)  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 618, in send
+    await self.ensure_open()
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 916, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 86, in send
+    await self._send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 39, in sender
+    await send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 330, in asgi_send
+    raise ClientDisconnected from exc
+uvicorn.protocols.utils.ClientDisconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 239, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 80, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 350, in handle
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 160, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 157, in app
+    await func(session)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 764, in app
+    await dependant.call(**solved_result.values)
+  File "/Users/idrismuhammad/New Bot /backend/app/api.py", line 126, in ws
+    await websocket.send_json({"type": "log", "data": entry})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 176, in send_json
+    await self.send({"type": "websocket.send", "text": text})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 89, in send
+    raise WebSocketDisconnect(code=1006)
+starlette.websockets.WebSocketDisconnect
+INFO:     127.0.0.1:62187 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:62223 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 940, in transfer_data
+    message = await self.read_message()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 1010, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 1087, in read_data_frame
+    frame = await self.read_frame(max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 1144, in read_frame
+    frame = await Frame.read(
+            ^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/framing.py", line 70, in read
+    data = await reader(2)
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/streams.py", line 767, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 317, in asgi_send
+    await self.send(data)  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 618, in send
+    await self.ensure_open()
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 916, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 86, in send
+    await self._send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 39, in sender
+    await send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 330, in asgi_send
+    raise ClientDisconnected from exc
+uvicorn.protocols.utils.ClientDisconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 239, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 80, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 350, in handle
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 160, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 157, in app
+    await func(session)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 764, in app
+    await dependant.call(**solved_result.values)
+  File "/Users/idrismuhammad/New Bot /backend/app/api.py", line 126, in ws
+    await websocket.send_json({"type": "log", "data": entry})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 176, in send_json
+    await self.send({"type": "websocket.send", "text": text})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 89, in send
+    raise WebSocketDisconnect(code=1006)
+starlette.websockets.WebSocketDisconnect
+INFO:     connection closed
+INFO:     127.0.0.1:62226 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 05:02:19.735 | INFO     | backend.app.logs:emit:44 - [INFO] Engine already running.
+2026-05-26 05:03:33.953 | INFO     | backend.app.logs:emit:44 - [INFO] Engine already running.
+2026-05-26 05:05:03.607 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:05:03.608 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA9=4543.89 EMA21=4543.08 RSI=49.2 ATR=2.71
+2026-05-26 05:05:03.610 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:05:03.611 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:05:03.613 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+INFO:     127.0.0.1:62274 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     connection closed
+INFO:     127.0.0.1:62283 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 940, in transfer_data
+    message = await self.read_message()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 1010, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 1087, in read_data_frame
+    frame = await self.read_frame(max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 1144, in read_frame
+    frame = await Frame.read(
+            ^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/framing.py", line 70, in read
+    data = await reader(2)
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/streams.py", line 767, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 317, in asgi_send
+    await self.send(data)  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 618, in send
+    await self.ensure_open()
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 916, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 86, in send
+    await self._send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 39, in sender
+    await send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 330, in asgi_send
+    raise ClientDisconnected from exc
+uvicorn.protocols.utils.ClientDisconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 239, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 80, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 350, in handle
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 160, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 157, in app
+    await func(session)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 764, in app
+    await dependant.call(**solved_result.values)
+  File "/Users/idrismuhammad/New Bot /backend/app/api.py", line 126, in ws
+    await websocket.send_json({"type": "log", "data": entry})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 176, in send_json
+    await self.send({"type": "websocket.send", "text": text})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 89, in send
+    raise WebSocketDisconnect(code=1006)
+starlette.websockets.WebSocketDisconnect
+INFO:     connection closed
+INFO:     127.0.0.1:62286 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 05:05:59.742 | INFO     | backend.app.logs:emit:44 - [INFO] Engine stopped.
+2026-05-26 05:06:09.400 | INFO     | backend.app.logs:emit:44 - [INFO] Engine starting [aggressive] on XAU/USDT:USDT
+2026-05-26 05:06:09.401 | INFO     | backend.app.logs:emit:44 - [INFO] [paper] skipping set_leverage / set_margin_mode (symbol=XAU/USDT:USDT)
+2026-05-26 05:10:03.034 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:10:03.036 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4543.38 EMA13=4543.20 RSI=47.4 ATR=2.32
+2026-05-26 05:10:03.038 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:10:03.039 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:10:03.041 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 05:15:03.679 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:15:03.681 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4542.16 EMA13=4542.66 RSI=44.8 ATR=2.42
+2026-05-26 05:15:03.683 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:15:03.684 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:15:03.686 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 05:20:03.580 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:20:03.585 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4542.33 EMA13=4542.73 RSI=46.0 ATR=2.62
+2026-05-26 05:20:03.586 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:20:03.588 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:20:03.590 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 05:25:03.575 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:25:03.578 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4541.16 EMA13=4542.17 RSI=40.7 ATR=2.65
+2026-05-26 05:25:03.580 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:25:03.582 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:25:03.583 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 05:30:03.792 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:30:03.795 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4538.57 EMA13=4540.66 RSI=36.7 ATR=2.36
+2026-05-26 05:30:03.797 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:30:03.798 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:30:03.799 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 05:35:03.611 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:35:03.613 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4537.83 EMA13=4540.35 RSI=33.3 ATR=2.66
+2026-05-26 05:35:03.615 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:35:03.616 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:35:03.618 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 05:40:03.844 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:40:03.846 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.26 EMA13=4537.98 RSI=29.5 ATR=2.54
+2026-05-26 05:40:03.847 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:40:03.849 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:40:03.851 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 05:45:03.748 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:45:03.750 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4533.80 EMA13=4537.78 RSI=27.8 ATR=2.88
+2026-05-26 05:45:03.752 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:45:03.753 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:45:03.755 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 05:50:04.356 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:50:04.358 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4532.91 EMA13=4536.83 RSI=31.2 ATR=2.86
+2026-05-26 05:50:04.359 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:50:04.361 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:50:04.362 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 05:55:04.133 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 05:55:04.156 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4532.27 EMA13=4535.99 RSI=31.0 ATR=2.76
+2026-05-26 05:55:04.157 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 05:55:04.158 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 05:55:04.160 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 06:00:04.282 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:00:04.284 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4530.61 EMA13=4534.22 RSI=28.5 ATR=2.66
+2026-05-26 06:00:04.286 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:00:04.287 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:00:04.289 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 06:05:03.996 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:05:03.998 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4531.80 EMA13=4534.73 RSI=38.5 ATR=3.22
+2026-05-26 06:05:04.000 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:05:04.003 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:05:04.004 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+INFO:     connection closed
+INFO:     127.0.0.1:63019 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:63039 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 06:10:03.435 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:10:03.437 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4532.47 EMA13=4534.60 RSI=41.4 ATR=3.28
+2026-05-26 06:10:03.438 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:10:03.440 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:10:03.441 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 06:15:03.497 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:15:03.498 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4532.58 EMA13=4534.34 RSI=39.4 ATR=3.17
+2026-05-26 06:15:03.500 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:15:03.502 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:15:03.503 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 06:20:04.002 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:20:04.004 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4532.76 EMA13=4534.17 RSI=40.2 ATR=3.03
+2026-05-26 06:20:04.006 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:20:04.007 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:20:04.009 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 06:25:04.094 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:25:04.096 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4533.14 EMA13=4533.98 RSI=41.6 ATR=2.65
+2026-05-26 06:25:04.098 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:25:04.099 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:25:04.101 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 06:30:03.502 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:30:03.504 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.08 EMA13=4534.29 RSI=46.5 ATR=2.74
+2026-05-26 06:30:03.506 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:30:03.507 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:30:03.509 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 06:35:03.553 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:35:03.555 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.71 EMA13=4534.56 RSI=51.2 ATR=2.96
+2026-05-26 06:35:03.557 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:35:03.558 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:35:03.568 | INFO     | backend.app.logs:emit:44 - [BUY] BUY XAU/USDT:USDT @ $4537.08 qty=50.723 (EMA bullish crossover confirmed)
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+INFO:     Started server process [27860]
+INFO:     Waiting for application startup.
+2026-05-26 06:36:25.147 | INFO     | backend.app.logs:emit:44 - [INFO] API ready.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2026-05-26 06:36:26.073 | INFO     | backend.app.logs:emit:44 - [INFO] Running in PAPER mode (no API keys). Orders are simulated locally.
+INFO:     127.0.0.1:63377 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+INFO:     Started server process [28469]
+INFO:     Waiting for application startup.
+2026-05-26 06:37:39.101 | INFO     | backend.app.logs:emit:44 - [INFO] API ready.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:63414 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 06:37:40.113 | INFO     | backend.app.logs:emit:44 - [INFO] Running in PAPER mode (no API keys). Balance=$10000.00. Orders are simulated locally.
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+INFO:     Started server process [29019]
+INFO:     Waiting for application startup.
+2026-05-26 06:38:57.168 | INFO     | backend.app.logs:emit:44 - [INFO] API ready.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:63444 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 06:38:58.204 | INFO     | backend.app.logs:emit:44 - [INFO] Running in PAPER mode (no API keys). Balance=$100.00. Orders are simulated locally.
+2026-05-26 06:39:13.632 | INFO     | backend.app.logs:emit:44 - [INFO] Engine stopped.
+2026-05-26 06:39:14.671 | INFO     | backend.app.logs:emit:44 - [INFO] Engine starting [balanced] on XAU/USDT:USDT
+2026-05-26 06:39:14.673 | INFO     | backend.app.logs:emit:44 - [INFO] [paper] skipping set_leverage / set_margin_mode (symbol=XAU/USDT:USDT)
+INFO:     connection closed
+INFO:     127.0.0.1:63460 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection closed
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 317, in asgi_send
+    await self.send(data)  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 618, in send
+    await self.ensure_open()
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 916, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 86, in send
+    await self._send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 39, in sender
+    await send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 330, in asgi_send
+    raise ClientDisconnected from exc
+uvicorn.protocols.utils.ClientDisconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 239, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 80, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 350, in handle
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 160, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 157, in app
+    await func(session)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 764, in app
+    await dependant.call(**solved_result.values)
+  File "/Users/idrismuhammad/New Bot /backend/app/api.py", line 134, in ws
+    await websocket.send_json({"type": "log", "data": entry})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 176, in send_json
+    await self.send({"type": "websocket.send", "text": text})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 89, in send
+    raise WebSocketDisconnect(code=1006)
+starlette.websockets.WebSocketDisconnect
+INFO:     127.0.0.1:63464 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 06:40:02.809 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:40:02.811 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA9=4534.81 EMA21=4535.69 RSI=48.1 ATR=2.73
+2026-05-26 06:40:02.813 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:40:02.815 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:40:02.817 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 06:40:59.927 | INFO     | backend.app.logs:emit:44 - [INFO] Engine stopped.
+2026-05-26 06:41:08.458 | INFO     | backend.app.logs:emit:44 - [INFO] Engine starting [aggressive] on XAU/USDT:USDT
+2026-05-26 06:41:08.460 | INFO     | backend.app.logs:emit:44 - [INFO] [paper] skipping set_leverage / set_margin_mode (symbol=XAU/USDT:USDT)
+2026-05-26 06:45:03.182 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:45:03.184 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.44 EMA13=4534.51 RSI=42.4 ATR=3.02
+2026-05-26 06:45:03.185 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:45:03.187 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:45:03.193 | INFO     | backend.app.logs:emit:44 - [SELL] SELL XAU/USDT:USDT @ $4533.18 qty=0.496 (EMA bearish crossover confirmed)
+2026-05-26 06:50:04.529 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:50:04.531 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4533.39 EMA13=4534.06 RSI=38.9 ATR=3.03
+2026-05-26 06:50:04.532 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:50:04.534 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:50:04.535 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 06:55:03.942 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 06:55:03.945 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4532.35 EMA13=4533.51 RSI=37.0 ATR=3.12
+2026-05-26 06:55:03.947 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 06:55:03.948 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 06:55:03.950 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:00:03.824 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:00:03.826 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4531.51 EMA13=4532.80 RSI=38.9 ATR=2.85
+2026-05-26 07:00:03.827 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:00:03.828 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:00:03.829 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:05:03.992 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:05:03.995 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4532.59 EMA13=4533.26 RSI=47.7 ATR=3.18
+2026-05-26 07:05:03.997 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:05:03.999 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:05:04.001 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:10:04.608 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:10:04.610 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4533.03 EMA13=4533.35 RSI=47.2 ATR=3.02
+2026-05-26 07:10:04.611 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:10:04.614 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:10:04.617 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:15:03.818 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:15:03.820 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4533.48 EMA13=4533.50 RSI=48.5 ATR=3.04
+2026-05-26 07:15:03.822 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:15:03.823 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:15:03.825 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:20:04.329 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:20:04.331 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4533.94 EMA13=4533.72 RSI=48.2 ATR=2.69
+2026-05-26 07:20:04.332 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:20:04.334 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:20:04.335 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:25:05.205 | INFO     | backend.app.logs:emit:44 - [LOSS] Position closed @ $4536.74  Loss: -$1.77
+2026-05-26 07:25:05.212 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:25:05.213 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.77 EMA13=4534.07 RSI=54.6 ATR=3.06
+2026-05-26 07:25:05.215 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:25:05.217 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:25:05.218 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:30:03.504 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:30:03.506 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.10 EMA13=4533.94 RSI=46.5 ATR=3.16
+2026-05-26 07:30:03.507 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:30:03.508 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:30:03.510 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:35:03.945 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:35:03.947 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.33 EMA13=4534.04 RSI=48.2 ATR=3.41
+2026-05-26 07:35:03.948 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:35:03.950 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:35:03.951 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:40:03.684 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:40:03.686 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.74 EMA13=4534.31 RSI=50.3 ATR=2.95
+2026-05-26 07:40:03.688 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:40:03.689 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:40:03.691 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:45:03.450 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:45:03.452 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4535.24 EMA13=4534.52 RSI=53.9 ATR=3.13
+2026-05-26 07:45:03.454 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:45:03.456 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:45:03.458 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:50:03.662 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:50:03.664 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.41 EMA13=4534.27 RSI=45.0 ATR=3.30
+2026-05-26 07:50:03.665 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:50:03.667 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:50:03.668 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 07:55:03.485 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 07:55:03.487 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.21 EMA13=4534.21 RSI=48.1 ATR=2.90
+2026-05-26 07:55:03.489 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 07:55:03.490 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 07:55:03.494 | INFO     | backend.app.logs:emit:44 - [SELL] SELL XAU/USDT:USDT @ $4534.02 qty=0.51 (EMA bearish crossover confirmed)
+2026-05-26 08:00:19.276 | ERROR    | backend.app.logs:emit:44 - [ERROR] OHLCV refresh failed [5m] after 3 attempts: binanceusdm GET https://fapi.binance.com/fapi/v1/klines?interval=5m&limit=200&symbol=XAUUSDT
+2026-05-26 08:00:26.758 | ERROR    | backend.app.logs:emit:44 - [ERROR] OHLCV refresh failed [1h] after 3 attempts: binanceusdm GET https://fapi.binance.com/fapi/v1/klines?interval=1h&limit=200&symbol=XAUUSDT
+2026-05-26 08:00:26.938 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 08:00:26.939 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.21 EMA13=4534.21 RSI=48.1 ATR=2.90
+2026-05-26 08:00:26.941 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 08:00:26.942 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 08:00:26.946 | INFO     | backend.app.logs:emit:44 - [INFO] Position already open, ignoring new signal.
+2026-05-26 08:05:09.261 | ERROR    | backend.app.logs:emit:44 - [ERROR] OHLCV refresh failed [5m] after 3 attempts: binanceusdm GET https://fapi.binance.com/fapi/v1/klines?interval=5m&limit=200&symbol=XAUUSDT
+2026-05-26 08:05:16.771 | ERROR    | backend.app.logs:emit:44 - [ERROR] OHLCV refresh failed [1h] after 3 attempts: binanceusdm GET https://fapi.binance.com/fapi/v1/klines?interval=1h&limit=200&symbol=XAUUSDT
+2026-05-26 08:05:16.954 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 08:05:16.955 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.21 EMA13=4534.21 RSI=48.1 ATR=2.90
+2026-05-26 08:05:16.956 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 08:05:16.957 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 08:05:16.960 | INFO     | backend.app.logs:emit:44 - [INFO] Position already open, ignoring new signal.
+2026-05-26 08:10:09.249 | ERROR    | backend.app.logs:emit:44 - [ERROR] OHLCV refresh failed [5m] after 3 attempts: binanceusdm GET https://fapi.binance.com/fapi/v1/klines?interval=5m&limit=200&symbol=XAUUSDT
+2026-05-26 08:10:16.712 | ERROR    | backend.app.logs:emit:44 - [ERROR] OHLCV refresh failed [1h] after 3 attempts: binanceusdm GET https://fapi.binance.com/fapi/v1/klines?interval=1h&limit=200&symbol=XAUUSDT
+2026-05-26 08:10:16.839 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 08:10:16.840 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.21 EMA13=4534.21 RSI=48.1 ATR=2.90
+2026-05-26 08:10:16.842 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 08:10:16.843 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 08:10:16.846 | INFO     | backend.app.logs:emit:44 - [INFO] Position already open, ignoring new signal.
+2026-05-26 08:15:09.266 | ERROR    | backend.app.logs:emit:44 - [ERROR] OHLCV refresh failed [5m] after 3 attempts: binanceusdm GET https://fapi.binance.com/fapi/v1/klines?interval=5m&limit=200&symbol=XAUUSDT
+2026-05-26 08:15:16.582 | ERROR    | backend.app.logs:emit:44 - [ERROR] OHLCV refresh failed [1h] after 3 attempts: binanceusdm GET https://fapi.binance.com/fapi/v1/klines?interval=1h&limit=200&symbol=XAUUSDT
+2026-05-26 08:15:16.645 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 08:15:16.647 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4534.21 EMA13=4534.21 RSI=48.1 ATR=2.90
+2026-05-26 08:15:16.648 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 08:15:16.650 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 08:15:16.654 | INFO     | backend.app.logs:emit:44 - [INFO] Position already open, ignoring new signal.
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+INFO:     Started server process [44067]
+INFO:     Waiting for application startup.
+2026-05-26 08:16:48.480 | INFO     | backend.app.logs:emit:44 - [INFO] API ready.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:64558 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 08:17:33.029 | INFO     | backend.app.logs:emit:44 - [INFO] Running in PAPER mode (no API keys). Balance=$98.51. Orders are simulated locally.
+2026-05-26 08:17:53.111 | INFO     | backend.app.logs:emit:44 - [INFO] Engine stopped.
+INFO:     connection closed
+INFO:     127.0.0.1:64585 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:64677 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 11:32:17.068 | INFO     | backend.app.logs:emit:44 - [INFO] Engine starting [aggressive] on XAU/USDT:USDT
+2026-05-26 11:32:17.071 | INFO     | backend.app.logs:emit:44 - [INFO] [paper] skipping set_leverage / set_margin_mode (symbol=XAU/USDT:USDT)
+2026-05-26 11:32:27.088 | ERROR    | backend.app.logs:emit:44 - [ERROR] backfill failed: binanceusdm GET https://fapi.binance.com/fapi/v1/klines?interval=5m&limit=500&symbol=XAUUSDT
+2026-05-26 11:32:27.101 | INFO     | backend.app.logs:emit:44 - [INFO] Engine starting [aggressive] on XAU/USDT:USDT
+2026-05-26 11:32:27.103 | INFO     | backend.app.logs:emit:44 - [INFO] [paper] skipping set_leverage / set_margin_mode (symbol=XAU/USDT:USDT)
+2026-05-26 11:35:05.927 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 11:35:05.930 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4535.14 EMA13=4530.51 RSI=65.5 ATR=4.44
+2026-05-26 11:35:05.931 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 11:35:05.933 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 11:35:05.935 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+INFO:     Started server process [47491]
+INFO:     Waiting for application startup.
+2026-05-26 11:38:06.896 | INFO     | backend.app.logs:emit:44 - [INFO] API ready.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:65222 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 11:38:08.839 | INFO     | backend.app.logs:emit:44 - [INFO] Running in PAPER mode (no API keys). Balance=$101.62. Orders are simulated locally.
+2026-05-26 11:38:08.844 | INFO     | backend.app.logs:emit:44 - [INFO] Engine starting [aggressive] on XAU/USDT:USDT
+2026-05-26 11:38:08.846 | INFO     | backend.app.logs:emit:44 - [INFO] [paper] skipping set_leverage / set_margin_mode (symbol=XAU/USDT:USDT)
+2026-05-26 11:40:03.016 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 11:40:03.019 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4535.86 EMA13=4531.50 RSI=59.5 ATR=4.46
+2026-05-26 11:40:03.020 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 11:40:03.022 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 11:40:03.023 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+INFO:     connection closed
+INFO:     127.0.0.1:65316 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:     127.0.0.1:65320 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 11:45:04.014 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 11:45:04.016 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4536.05 EMA13=4532.75 RSI=58.3 ATR=3.90
+2026-05-26 11:45:04.018 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 11:45:04.019 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 11:45:04.021 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 11:50:04.008 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 11:50:04.012 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4538.13 EMA13=4534.21 RSI=62.2 ATR=3.91
+2026-05-26 11:50:04.016 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 11:50:04.019 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 11:50:04.021 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+INFO:     connection closed
+INFO:     127.0.0.1:65497 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 940, in transfer_data
+    message = await self.read_message()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 1010, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 1087, in read_data_frame
+    frame = await self.read_frame(max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 1144, in read_frame
+    frame = await Frame.read(
+            ^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/framing.py", line 70, in read
+    data = await reader(2)
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/streams.py", line 767, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 317, in asgi_send
+    await self.send(data)  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 618, in send
+    await self.ensure_open()
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/websockets/legacy/protocol.py", line 916, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 86, in send
+    await self._send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 39, in sender
+    await send(message)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 330, in asgi_send
+    raise ClientDisconnected from exc
+uvicorn.protocols.utils.ClientDisconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 239, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/cors.py", line 80, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/routing.py", line 350, in handle
+    await self.app(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 160, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 157, in app
+    await func(session)
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/fastapi/routing.py", line 764, in app
+    await dependant.call(**solved_result.values)
+  File "/Users/idrismuhammad/New Bot /backend/app/api.py", line 134, in ws
+    await websocket.send_json({"type": "log", "data": entry})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 176, in send_json
+    await self.send({"type": "websocket.send", "text": text})
+  File "/Users/idrismuhammad/New Bot /.venv/lib/python3.14/site-packages/starlette/websockets.py", line 89, in send
+    raise WebSocketDisconnect(code=1006)
+starlette.websockets.WebSocketDisconnect
+INFO:     connection closed
+INFO:     127.0.0.1:65501 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 11:55:04.058 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 11:55:04.060 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4537.21 EMA13=4533.81 RSI=58.0 ATR=4.44
+2026-05-26 11:55:04.063 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 11:55:04.064 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 11:55:04.065 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+INFO:     connection closed
+INFO:     127.0.0.1:49175 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 12:00:03.986 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:00:03.989 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4537.23 EMA13=4534.30 RSI=58.1 ATR=4.11
+2026-05-26 12:00:03.991 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:00:03.992 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:00:03.995 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 12:05:04.004 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:05:04.007 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4537.93 EMA13=4535.43 RSI=58.6 ATR=3.73
+2026-05-26 12:05:04.009 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:05:04.011 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:05:04.014 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 12:10:04.222 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:10:04.224 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4537.90 EMA13=4535.77 RSI=58.0 ATR=3.46
+2026-05-26 12:10:04.225 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:10:04.227 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:10:04.228 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 12:15:04.199 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:15:04.202 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4536.89 EMA13=4535.34 RSI=53.0 ATR=3.81
+2026-05-26 12:15:04.204 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:15:04.207 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:15:04.209 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 12:20:04.638 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:20:04.640 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4535.83 EMA13=4535.11 RSI=51.3 ATR=3.71
+2026-05-26 12:20:04.641 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:20:04.643 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:20:04.644 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 12:25:04.002 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:25:04.005 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4533.91 EMA13=4534.39 RSI=45.9 ATR=3.79
+2026-05-26 12:25:04.006 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:25:04.008 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:25:04.015 | INFO     | backend.app.logs:emit:44 - [SELL] SELL XAU/USDT:USDT @ $4530.07 qty=0.401 (EMA bearish crossover confirmed)
+2026-05-26 12:30:04.583 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:30:04.585 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4530.28 EMA13=4532.51 RSI=42.5 ATR=3.32
+2026-05-26 12:30:04.586 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:30:04.588 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:30:04.589 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 12:35:05.159 | INFO     | backend.app.logs:emit:44 - [PROFIT] Position closed @ $4523.22  Profit: +$2.75
+2026-05-26 12:35:05.166 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:35:05.168 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4528.86 EMA13=4531.90 RSI=37.5 ATR=3.91
+2026-05-26 12:35:05.169 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:35:05.171 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:35:05.172 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 12:40:04.097 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:40:04.099 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4521.14 EMA13=4527.42 RSI=30.0 ATR=4.26
+2026-05-26 12:40:04.101 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:40:04.102 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:40:04.104 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 12:45:04.164 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:45:04.166 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4518.81 EMA13=4525.52 RSI=29.7 ATR=4.52
+2026-05-26 12:45:04.168 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:45:04.169 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:45:04.170 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 12:50:04.090 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:50:04.093 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4519.84 EMA13=4525.97 RSI=34.9 ATR=5.15
+2026-05-26 12:50:04.094 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:50:04.096 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:50:04.097 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 12:55:04.319 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 12:55:04.321 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4518.48 EMA13=4524.50 RSI=33.4 ATR=5.03
+2026-05-26 12:55:04.323 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 12:55:04.324 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 12:55:04.325 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:00:04.176 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:00:04.178 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4516.13 EMA13=4522.63 RSI=29.6 ATR=5.43
+2026-05-26 13:00:04.179 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:00:04.181 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:00:04.182 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:05:04.083 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:05:04.085 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4514.00 EMA13=4519.89 RSI=31.4 ATR=4.94
+2026-05-26 13:05:04.087 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:05:04.088 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:05:04.090 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:10:03.982 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:10:03.985 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4514.74 EMA13=4520.21 RSI=35.5 ATR=5.50
+2026-05-26 13:10:03.986 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:10:03.988 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:10:03.990 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:15:04.648 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:15:04.650 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4514.82 EMA13=4519.46 RSI=36.2 ATR=5.39
+2026-05-26 13:15:04.652 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:15:04.653 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:15:04.655 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:20:04.924 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:20:04.926 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4515.30 EMA13=4518.45 RSI=37.7 ATR=4.86
+2026-05-26 13:20:04.928 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:20:04.929 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:20:04.931 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:25:04.933 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:25:04.935 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4514.54 EMA13=4518.13 RSI=34.9 ATR=5.25
+2026-05-26 13:25:04.937 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:25:04.938 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:25:04.940 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:30:05.376 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:30:05.378 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4513.21 EMA13=4517.05 RSI=31.9 ATR=5.40
+2026-05-26 13:30:05.380 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:30:05.381 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:30:05.383 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:35:04.501 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:35:04.503 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4513.63 EMA13=4516.68 RSI=39.5 ATR=5.70
+2026-05-26 13:35:04.505 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:35:04.507 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:35:04.508 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:40:05.283 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:40:05.285 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4509.97 EMA13=4514.12 RSI=32.1 ATR=5.38
+2026-05-26 13:40:05.286 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:40:05.288 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:40:05.290 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:45:04.308 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:45:04.310 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4512.62 EMA13=4515.26 RSI=44.2 ATR=6.22
+2026-05-26 13:45:04.311 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:45:04.313 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:45:04.315 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:50:04.029 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:50:04.032 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4516.05 EMA13=4516.36 RSI=53.0 ATR=6.54
+2026-05-26 13:50:04.033 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:50:04.034 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:50:04.036 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 13:55:04.053 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 13:55:04.055 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4521.13 EMA13=4518.70 RSI=55.3 ATR=5.76
+2026-05-26 13:55:04.057 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 13:55:04.058 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 13:55:04.060 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:00:04.085 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:00:04.087 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4520.57 EMA13=4518.46 RSI=53.3 ATR=6.18
+2026-05-26 14:00:04.088 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:00:04.090 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:00:04.092 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:05:03.969 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:05:03.971 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4523.69 EMA13=4520.51 RSI=56.0 ATR=5.62
+2026-05-26 14:05:03.973 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:05:03.974 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:05:03.976 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:10:04.409 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:10:04.411 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4523.76 EMA13=4520.97 RSI=53.9 ATR=5.50
+2026-05-26 14:10:04.412 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:10:04.413 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:10:04.415 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:15:04.242 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:15:04.244 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4522.71 EMA13=4520.52 RSI=50.0 ATR=6.06
+2026-05-26 14:15:04.245 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:15:04.247 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:15:04.248 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:20:04.051 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:20:04.053 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4523.29 EMA13=4521.38 RSI=52.7 ATR=5.24
+2026-05-26 14:20:04.055 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:20:04.057 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:20:04.058 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:25:04.812 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:25:04.814 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4525.10 EMA13=4522.15 RSI=58.4 ATR=5.84
+2026-05-26 14:25:04.816 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:25:04.817 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:25:04.819 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:30:04.235 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:30:04.237 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4525.23 EMA13=4522.63 RSI=53.7 ATR=5.75
+2026-05-26 14:30:04.239 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:30:04.240 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:30:04.242 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:35:03.993 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:35:03.994 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4525.21 EMA13=4522.99 RSI=53.4 ATR=5.76
+2026-05-26 14:35:03.995 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:35:03.996 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:35:03.998 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:40:06.078 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:40:06.080 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4526.45 EMA13=4524.17 RSI=55.7 ATR=5.33
+2026-05-26 14:40:06.082 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:40:06.083 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:40:06.085 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:45:04.070 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:45:04.072 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4528.53 EMA13=4525.47 RSI=59.3 ATR=5.41
+2026-05-26 14:45:04.073 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:45:04.075 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:45:04.078 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:50:04.143 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:50:04.145 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4528.02 EMA13=4525.25 RSI=57.3 ATR=5.69
+2026-05-26 14:50:04.147 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:50:04.148 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:50:04.150 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 14:55:03.980 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 14:55:03.983 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4523.48 EMA13=4523.82 RSI=45.7 ATR=5.77
+2026-05-26 14:55:03.985 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 14:55:03.989 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 14:55:03.991 | INFO     | backend.app.logs:emit:44 - [SELL] SELL XAU/USDT:USDT @ $4519.81 qty=0.269 (EMA bearish crossover confirmed)
+2026-05-26 15:00:04.721 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 15:00:04.722 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4521.53 EMA13=4522.88 RSI=45.0 ATR=5.73
+2026-05-26 15:00:04.724 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 15:00:04.725 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 15:00:04.727 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 15:05:04.482 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 15:05:04.486 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4522.38 EMA13=4523.25 RSI=48.1 ATR=6.24
+2026-05-26 15:05:04.488 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 15:05:04.490 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 15:05:04.492 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+2026-05-26 15:10:04.727 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Analyzing market trends...
+2026-05-26 15:10:04.730 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] EMA5=4521.35 EMA13=4522.68 RSI=45.8 ATR=6.10
+2026-05-26 15:10:04.734 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Checking support/resistance levels...
+2026-05-26 15:10:04.738 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] Reviewing market sentiment...
+2026-05-26 15:10:04.740 | INFO     | backend.app.logs:emit:44 - [ANALYSIS] No setup (no setup). Monitoring price action...
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+INFO:     Started server process [78651]
+INFO:     Waiting for application startup.
+2026-05-26 15:12:49.118 | INFO     | backend.app.logs:emit:44 - [INFO] API ready.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:52027 - "WebSocket /ws?token=change-me-please" [accepted]
+INFO:     connection open
+2026-05-26 15:26:09.254 | INFO     | backend.app.logs:emit:44 - [INFO] Running in PAPER mode (no API keys). Balance=$103.89. Orders are simulated locally.
