@@ -10,7 +10,7 @@ from sqlmodel import Session, select
 from . import logs
 from .db import BotConfig, EquityPoint, Trade, engine
 from .exchange import Exchange
-from .marketdata import MarketData
+from .marketdata import MarketData, _timeframe_seconds
 from .risk import check_circuit_breakers, size_position
 from .settings import get_settings
 from .strategies.base import Signal, Strategy
@@ -145,7 +145,19 @@ class TradingEngine:
                 if self._stop_event.is_set():
                     break
                 df_sig = self.market.refresh(s.signal_timeframe)
-                df_trend = self.market.refresh(s.trend_timeframe)
+                # Trend frame only changes when its own candle closes — re-fetching
+                # on every signal tick wastes API budget and contributes to 429s
+                # at the top of each hour. Refresh only when wall-clock aligns.
+                import time as _t
+                trend_secs = _timeframe_seconds(s.trend_timeframe)
+                wall = _t.time()
+                # within first 30s after the trend candle close → refresh, else reuse cache.
+                if (wall % trend_secs) < 30:
+                    df_trend = self.market.refresh(s.trend_timeframe)
+                else:
+                    df_trend = self.market.frames.get(
+                        s.trend_timeframe
+                    ) or self.market.refresh(s.trend_timeframe)
                 await self._on_tick(df_sig, df_trend)
             except asyncio.CancelledError:
                 break

@@ -58,6 +58,7 @@ class TAClassicStrategy(Strategy):
         prev_ema_f = float(ema_f.iloc[-2])
         prev_ema_s = float(ema_s.iloc[-2])
         last_rsi = float(rsi_v.iloc[-1])
+        prev_rsi = float(rsi_v.iloc[-2])
         last_atr = float(atr_v.iloc[-1])
 
         # Higher timeframe trend filter (EMA 50 slope).
@@ -79,6 +80,16 @@ class TAClassicStrategy(Strategy):
         cross_dn = prev_ema_f >= prev_ema_s and last_ema_f < last_ema_s
         above = last_ema_f > last_ema_s
         below = last_ema_f < last_ema_s
+        # Momentum continuation: EMA spread > 0.1*ATR (clean separation, not noise)
+        # AND RSI just crossed the 50 midline in trend direction. Lets the bot
+        # catch trends that started before the last candle without waiting for
+        # a fresh crossover that may never come.
+        spread = abs(last_ema_f - last_ema_s)
+        clean_spread = last_atr > 0 and spread > 0.1 * last_atr
+        rsi_cross_up = prev_rsi <= 50 < last_rsi
+        rsi_cross_dn = prev_rsi >= 50 > last_rsi
+        momo_up = above and clean_spread and rsi_cross_up
+        momo_dn = below and clean_spread and rsi_cross_dn
 
         action = "HOLD"
         confidence = 0.0
@@ -86,10 +97,13 @@ class TAClassicStrategy(Strategy):
 
         # BUY conditions
         buy_trend = above and (trend_up is None or trend_up is True or p.allow_counter_trend)
-        if (cross_up or (buy_trend and last_rsi < p.rsi_oversold)):
+        if (cross_up or momo_up or (buy_trend and last_rsi < p.rsi_oversold)):
             if cross_up:
                 reason = "EMA bullish crossover confirmed"
                 confidence = 0.7
+            elif momo_up:
+                reason = "Bullish momentum continuation (RSI>50, EMAs spread)"
+                confidence = 0.6
             else:
                 notes.append("RSI indicating oversold conditions")
                 reason = "Oversold bounce with bullish trend"
@@ -101,10 +115,13 @@ class TAClassicStrategy(Strategy):
 
         # SELL conditions
         sell_trend = below and (trend_up is None or trend_up is False or p.allow_counter_trend)
-        if action == "HOLD" and (cross_dn or (sell_trend and last_rsi > p.rsi_overbought)):
+        if action == "HOLD" and (cross_dn or momo_dn or (sell_trend and last_rsi > p.rsi_overbought)):
             if cross_dn:
                 reason = "EMA bearish crossover confirmed"
                 confidence = 0.7
+            elif momo_dn:
+                reason = "Bearish momentum continuation (RSI<50, EMAs spread)"
+                confidence = 0.6
             else:
                 notes.append("RSI indicating overbought conditions")
                 reason = "Overbought rejection with bearish trend"

@@ -89,14 +89,18 @@ class MarketData:
         return self.frames.get(timeframe, pd.DataFrame(columns=OHLCV_COLS))
 
     async def wait_for_next_close(self, timeframe: str) -> None:
-        """Sleep until just after the next candle close for the given timeframe."""
-        seconds = _timeframe_seconds(timeframe)
-        loop = asyncio.get_running_loop()
-        now = loop.time()
-        # align to wall clock instead — use monotonic offset from current minute boundary.
+        """Sleep until just after the next candle close for the given timeframe.
+
+        Adds a small randomized jitter (1–4s) on top of the 2s grace so we don't
+        hammer Bitget at the same wall-clock instant as every other bot — this is
+        what causes the 429 'Too Many Requests' bursts on the top of each hour.
+        """
+        import random
         import time
+        seconds = _timeframe_seconds(timeframe)
         wall = time.time()
-        next_close = (int(wall // seconds) + 1) * seconds + 2  # +2s grace for exchange
+        jitter = random.uniform(1.0, 4.0)
+        next_close = (int(wall // seconds) + 1) * seconds + 2 + jitter
         await asyncio.sleep(max(0.5, next_close - wall))
 
 
