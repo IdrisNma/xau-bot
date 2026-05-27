@@ -179,9 +179,9 @@ class Exchange:
             return {"id": "paper", "price": price, "amount": qty, "side": side.lower()}
         params: dict[str, Any] = {"marginCoin": "USDT", "productType": "USDT-FUTURES"}
         if sl is not None:
-            params["presetStopLossPrice"] = sl
+            params["presetStopLossPrice"] = float(self.client.price_to_precision(self.symbol, sl))
         if tp is not None:
-            params["presetStopSurplusPrice"] = tp
+            params["presetStopSurplusPrice"] = float(self.client.price_to_precision(self.symbol, tp))
         return self.client.create_order(self.symbol, "market", side.lower(), qty, None, params)
 
     def stop_loss(self, side: str, qty: float, stop_price: float) -> dict[str, Any] | None:
