@@ -30,7 +30,7 @@ class TradingEngine:
         self.strategy: Strategy = build_strategy(self.settings.default_strategy)
         self._task: Optional[asyncio.Task] = None
         self._stop_event = asyncio.Event()
-        self._open_trade_id: Optional[int] = None
+        self._open_trade_ids: set[int] = set()
 
     # ---- lifecycle -----------------------------------------------------
     async def start(self, strategy_name: str | None = None) -> None:
@@ -184,8 +184,11 @@ class TradingEngine:
                     s.commit()
             return
 
-        if self._open_trade_id is not None:
-            logs.info("Position already open, ignoring new signal.")
+        if len(self._open_trade_ids) >= self.settings.max_concurrent_positions:
+            logs.info(
+                f"Max concurrent positions reached ({self.settings.max_concurrent_positions}), "
+                "ignoring new signal."
+            )
             return
 
         # Size + place order
@@ -247,42 +250,47 @@ class TradingEngine:
             s.add(tr)
             s.commit()
             s.refresh(tr)
-            self._open_trade_id = tr.id
+            self._open_trade_ids.add(tr.id)  # type: ignore[arg-type]
 
     async def _reconcile_open_trade(self, reason: str | None = None) -> None:
-        """If we recorded an open trade but exchange shows no position, close it in DB."""
-        if self._open_trade_id is None:
+        """If exchange shows no position, close all tracked trades in DB."""
+        if not self._open_trade_ids:
             return
         pos = self.exchange.fetch_position()
         if pos is not None:
-            return  # still open
+            return  # aggregate position still open
+        exit_price = self.exchange.fetch_last_price()
+        closed_ids: list[int] = []
+        total_pnl = 0.0
         with Session(engine) as s:
-            tr = s.get(Trade, self._open_trade_id)
-            if not tr or tr.outcome != "OPEN":
-                self._open_trade_id = None
-                return
-            exit_price = self.exchange.fetch_last_price()
-            direction = 1 if tr.side == "BUY" else -1
-            pnl = (exit_price - tr.entry_price) * direction * tr.qty
-            tr.exit_price = exit_price
-            tr.pnl = pnl
-            tr.closed_at = datetime.utcnow()
-            tr.outcome = "WIN" if pnl > 0 else ("LOSS" if pnl < 0 else "BE")
-            if reason:
-                tr.reason = (tr.reason or "") + f" | closed: {reason}"
-            s.add(tr)
-            # equity snapshot
+            for tid in list(self._open_trade_ids):
+                tr = s.get(Trade, tid)
+                if not tr or tr.outcome != "OPEN":
+                    closed_ids.append(tid)
+                    continue
+                direction = 1 if tr.side == "BUY" else -1
+                pnl = (exit_price - tr.entry_price) * direction * tr.qty
+                tr.exit_price = exit_price
+                tr.pnl = pnl
+                tr.closed_at = datetime.utcnow()
+                tr.outcome = "WIN" if pnl > 0 else ("LOSS" if pnl < 0 else "BE")
+                if reason:
+                    tr.reason = (tr.reason or "") + f" | closed: {reason}"
+                s.add(tr)
+                total_pnl += pnl
+                closed_ids.append(tid)
             equity = self.exchange.fetch_balance_usdt()
             if equity:
                 s.add(EquityPoint(equity=equity))
             s.commit()
-        self._open_trade_id = None
-        if pnl > 0:
-            logs.profit(f"Position closed @ ${exit_price:.2f}  Profit: +${pnl:.2f}")
-        elif pnl < 0:
-            logs.loss(f"Position closed @ ${exit_price:.2f}  Loss: -${abs(pnl):.2f}")
+        for tid in closed_ids:
+            self._open_trade_ids.discard(tid)
+        if total_pnl > 0:
+            logs.profit(f"Position(s) closed @ ${exit_price:.2f}  Profit: +${total_pnl:.2f}")
+        elif total_pnl < 0:
+            logs.loss(f"Position(s) closed @ ${exit_price:.2f}  Loss: -${abs(total_pnl):.2f}")
         else:
-            logs.info(f"Position closed @ ${exit_price:.2f}  Breakeven")
+            logs.info(f"Position(s) closed @ ${exit_price:.2f}  Breakeven")
 
 
 # Singleton accessor

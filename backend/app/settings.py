@@ -33,6 +33,7 @@ class Settings(BaseSettings):
 
     # Safety
     live_enabled: bool = False
+    max_concurrent_positions: int = 3
 
     # API
     api_bearer_token: str = "change-me-please"
