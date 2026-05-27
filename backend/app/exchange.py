@@ -153,7 +153,14 @@ class Exchange:
             return False
         return True
 
-    def market_order(self, side: str, qty: float) -> dict[str, Any] | None:
+    def market_order(
+        self,
+        side: str,
+        qty: float,
+        sl: float | None = None,
+        tp: float | None = None,
+    ) -> dict[str, Any] | None:
+        """Place a market order with optional attached SL/TP (Bitget bracket)."""
         if not self._live_allowed():
             return None
         if self.paper:
@@ -164,12 +171,18 @@ class Exchange:
                 "contracts": qty,
                 "entryPrice": price,
             }
+            if sl is not None:
+                self._paper_sl = sl
+            if tp is not None:
+                self._paper_tp = tp
             self._save_paper_state()
             return {"id": "paper", "price": price, "amount": qty, "side": side.lower()}
-        return self.client.create_order(
-            self.symbol, "market", side.lower(), qty, None,
-            {"marginCoin": "USDT", "productType": "USDT-FUTURES"},
-        )
+        params: dict[str, Any] = {"marginCoin": "USDT", "productType": "USDT-FUTURES"}
+        if sl is not None:
+            params["presetStopLossPrice"] = sl
+        if tp is not None:
+            params["presetStopSurplusPrice"] = tp
+        return self.client.create_order(self.symbol, "market", side.lower(), qty, None, params)
 
     def stop_loss(self, side: str, qty: float, stop_price: float) -> dict[str, Any] | None:
         if not self._live_allowed():

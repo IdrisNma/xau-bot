@@ -62,8 +62,28 @@ class TradingEngine:
             s.commit()
         logs.info(f"Engine starting [{self.strategy.preset.name}] on {self.settings.symbol}")
         self.exchange.configure_market()
+        self._check_orphan_position()
         self._stop_event.clear()
         self._task = asyncio.create_task(self._run())
+
+    def _check_orphan_position(self) -> None:
+        """Detect positions on the exchange that the bot has no local record of."""
+        if self.exchange.paper:
+            return
+        try:
+            pos = self.exchange.fetch_position()
+        except Exception as e:  # noqa: BLE001
+            logs.error(f"orphan check failed: {type(e).__name__}: {e!r}")
+            return
+        if pos is None:
+            return
+        contracts = abs(float(pos.get("contracts") or 0))
+        side = pos.get("side")
+        entry = pos.get("entryPrice")
+        logs.error(
+            f"ORPHAN POSITION DETECTED on Bitget: {side} {contracts} @ ${entry}. "
+            "Bot has no record. Add SL/TP manually on Bitget or click Stop to flatten."
+        )
 
     async def stop(self, flatten: bool = True) -> None:
         self._stop_event.set()
@@ -205,13 +225,11 @@ class TradingEngine:
         log_fn(f"{side} {self.settings.symbol} @ ${price:.2f} qty={sized.qty} ({signal.reason})")
 
         try:
-            self.exchange.market_order(side, sized.qty)
-            if signal.sl:
-                self.exchange.stop_loss(side, sized.qty, signal.sl)
-            if signal.tp:
-                self.exchange.take_profit(side, sized.qty, signal.tp)
+            # Atomic placement: market + SL + TP in one call. Either all
+            # land on Bitget or nothing does — no orphaned positions.
+            self.exchange.market_order(side, sized.qty, sl=signal.sl, tp=signal.tp)
         except Exception as e:  # noqa: BLE001
-            logs.error(f"order placement failed: {e}")
+            logs.error(f"order placement failed: {type(e).__name__}: {e!r}")
             return
 
         with Session(engine) as s:
