@@ -166,7 +166,10 @@ class Exchange:
             }
             self._save_paper_state()
             return {"id": "paper", "price": price, "amount": qty, "side": side.lower()}
-        return self.client.create_order(self.symbol, "market", side.lower(), qty)
+        return self.client.create_order(
+            self.symbol, "market", side.lower(), qty, None,
+            {"marginCoin": "USDT", "productType": "USDT-FUTURES"},
+        )
 
     def stop_loss(self, side: str, qty: float, stop_price: float) -> dict[str, Any] | None:
         if not self._live_allowed():
@@ -177,8 +180,15 @@ class Exchange:
             return {"id": "paper-sl", "stopPrice": stop_price}
         opposite = "sell" if side.upper() == "BUY" else "buy"
         return self.client.create_order(
-            self.symbol, "stop", opposite, qty, None,
-            {"stopPrice": stop_price, "reduceOnly": True, "triggerType": "mark_price"},
+            self.symbol, "market", opposite, qty, None,
+            {
+                "marginCoin": "USDT",
+                "productType": "USDT-FUTURES",
+                "stopPrice": stop_price,
+                "triggerPrice": stop_price,
+                "reduceOnly": True,
+                "triggerType": "mark_price",
+            },
         )
 
     def take_profit(self, side: str, qty: float, tp_price: float) -> dict[str, Any] | None:
@@ -190,8 +200,16 @@ class Exchange:
             return {"id": "paper-tp", "stopPrice": tp_price}
         opposite = "sell" if side.upper() == "BUY" else "buy"
         return self.client.create_order(
-            self.symbol, "take_profit", opposite, qty, None,
-            {"stopPrice": tp_price, "reduceOnly": True, "triggerType": "mark_price"},
+            self.symbol, "market", opposite, qty, None,
+            {
+                "marginCoin": "USDT",
+                "productType": "USDT-FUTURES",
+                "stopPrice": tp_price,
+                "triggerPrice": tp_price,
+                "reduceOnly": True,
+                "triggerType": "mark_price",
+                "takeProfit": True,
+            },
         )
 
     def flatten(self) -> None:
