@@ -172,7 +172,7 @@ class TradingEngine:
         price = float(df_sig["close"].iloc[-1])
         equity = self.exchange.fetch_balance_usdt() or starting_equity
         sized = size_position(
-            equity=equity * self.settings.leverage,  # buying power
+            equity=equity,
             entry_price=price,
             stop_price=signal.sl or price,
             risk_pct=self.settings.risk_pct,
@@ -180,6 +180,25 @@ class TradingEngine:
         if sized.qty <= 0:
             logs.info(f"Sizing rejected: {sized.rejected_reason}")
             return
+        # Cap qty so required margin fits inside available equity (90% buffer).
+        max_notional = equity * self.settings.leverage * 0.9
+        if sized.notional > max_notional:
+            capped_qty = max(0.0, (max_notional / price))
+            # round down to 0.001 step
+            capped_qty = (capped_qty // 0.001) * 0.001
+            if capped_qty < 0.001:
+                logs.info(
+                    f"Sizing capped to 0 by available margin "
+                    f"(equity=${equity:.2f}, leverage={self.settings.leverage}x, "
+                    f"notional=${sized.notional:.2f}, max=${max_notional:.2f})"
+                )
+                return
+            logs.info(
+                f"Sizing capped by margin: qty {sized.qty} → {capped_qty} "
+                f"(equity=${equity:.2f}, max_notional=${max_notional:.2f})"
+            )
+            sized.qty = capped_qty
+            sized.notional = capped_qty * price
 
         side = signal.action
         log_fn = logs.buy if side == "BUY" else logs.sell
