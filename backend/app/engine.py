@@ -155,9 +155,10 @@ class TradingEngine:
                 if (wall % trend_secs) < 30:
                     df_trend = self.market.refresh(s.trend_timeframe)
                 else:
-                    df_trend = self.market.frames.get(
+                    cached = self.market.frames.get(s.trend_timeframe)
+                    df_trend = cached if cached is not None else self.market.refresh(
                         s.trend_timeframe
-                    ) or self.market.refresh(s.trend_timeframe)
+                    )
                 await self._on_tick(df_sig, df_trend)
             except asyncio.CancelledError:
                 break
