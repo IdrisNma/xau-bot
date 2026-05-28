@@ -23,7 +23,7 @@ PRESETS: dict[str, Preset] = {
         rsi_oversold=35, rsi_overbought=65,
         ema_fast=5, ema_slow=13,
         atr_period=10, sl_atr_mult=1.2, tp_atr_mult=2.0,
-        max_trades_per_day=8, require_trend_filter=False, allow_counter_trend=True,
+        max_trades_per_day=6, require_trend_filter=True, allow_counter_trend=False,
     ),
 }
 

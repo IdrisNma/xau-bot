@@ -80,12 +80,24 @@ class TAClassicStrategy(Strategy):
         cross_dn = prev_ema_f >= prev_ema_s and last_ema_f < last_ema_s
         above = last_ema_f > last_ema_s
         below = last_ema_f < last_ema_s
+        spread = abs(last_ema_f - last_ema_s)
+        spread_ratio = (spread / last_atr) if last_atr > 0 else 0.0
+
+        # Avoid chop: when EMA spread is tiny relative to ATR, crossover and
+        # momentum signals are mostly noise on 5m and tend to whipsaw.
+        if spread_ratio < 0.12:
+            return Signal(
+                action="HOLD",
+                confidence=0.0,
+                reason="choppy regime (EMA spread too narrow vs ATR)",
+                analysis_notes=notes,
+            )
+
         # Momentum continuation: EMA spread > 0.1*ATR (clean separation, not noise)
         # AND RSI just crossed the 50 midline in trend direction. Lets the bot
         # catch trends that started before the last candle without waiting for
         # a fresh crossover that may never come.
-        spread = abs(last_ema_f - last_ema_s)
-        clean_spread = last_atr > 0 and spread > 0.1 * last_atr
+        clean_spread = spread_ratio > 0.15
         rsi_cross_up = prev_rsi <= 50 < last_rsi
         rsi_cross_dn = prev_rsi >= 50 > last_rsi
         momo_up = above and clean_spread and rsi_cross_up
