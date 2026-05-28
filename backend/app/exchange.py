@@ -108,7 +108,17 @@ class Exchange:
             self.client.set_margin_mode(s.margin_mode, self.symbol)
         except Exception as e:  # noqa: BLE001
             msg = str(e).lower()
-            if "no need to change" not in msg and "already" not in msg:
+            # Bitget rejects margin-mode changes while a position/order is open
+            # (code 45117). That's expected on restart — log as INFO, not ERROR.
+            benign = (
+                "no need to change" in msg
+                or "already" in msg
+                or "45117" in msg
+                or "currently holding" in msg
+            )
+            if benign:
+                logs.info(f"set_margin_mode skipped (position/order open): {e}")
+            else:
                 logs.error(f"set_margin_mode failed: {e}")
 
     # ---- data (public — work without keys) -----------------------------
