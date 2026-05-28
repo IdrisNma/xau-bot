@@ -50,10 +50,19 @@ class EquityPoint(SQLModel, table=True):
 
 
 _settings = get_settings()
+
+# Normalize Railway/Heroku-style "postgres://" → "postgresql://" since
+# SQLAlchemy 2.x dropped the bare "postgres" dialect alias. Otherwise the
+# engine errors with NoSuchModuleError on startup.
+_db_url = _settings.database_url
+if _db_url.startswith("postgres://"):
+    _db_url = "postgresql://" + _db_url[len("postgres://"):]
+
 engine = create_engine(
-    _settings.database_url,
+    _db_url,
     echo=False,
-    connect_args={"check_same_thread": False} if _settings.database_url.startswith("sqlite") else {},
+    connect_args={"check_same_thread": False} if _db_url.startswith("sqlite") else {},
+    pool_pre_ping=True,
 )
 
 
