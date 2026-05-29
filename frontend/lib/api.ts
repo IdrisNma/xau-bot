@@ -24,10 +24,14 @@ export const api = {
     }).then(j<any>),
   stop: () => fetch(`${API}/bot/stop`, { method: "POST", headers: authHeader() }).then(j<any>),
   remove: () => fetch(`${API}/bot`, { method: "DELETE", headers: authHeader() }).then(j<any>),
-  manualTrade: (side: "BUY" | "SELL", qty: number, sl?: number, tp?: number) =>
+  manualTrade: (side: "BUY" | "SELL", qty: number, sl?: number, tps?: (number | null)[]) =>
     fetch(`${API}/bot/trade`, {
       method: "POST",
       headers: { "Content-Type": "application/json", ...authHeader() },
-      body: JSON.stringify({ side, qty, sl: sl ?? null, tp: tp ?? null }),
+      body: JSON.stringify({
+        side, qty,
+        sl: sl ?? null,
+        tps: (tps || []).filter((x): x is number => typeof x === "number" && x > 0),
+      }),
     }).then(j<any>),
 };

@@ -12,7 +12,10 @@ export function ManualTradeModal({ onClose, onDone }: Props) {
   const [side, setSide] = useState<"BUY" | "SELL">("BUY");
   const [qty, setQty] = useState("");
   const [sl, setSl] = useState("");
-  const [tp, setTp] = useState("");
+  const [tp1, setTp1] = useState("");
+  const [tp2, setTp2] = useState("");
+  const [tp3, setTp3] = useState("");
+  const [tp4, setTp4] = useState("");
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<string | null>(null);
 
@@ -20,13 +23,15 @@ export function ManualTradeModal({ onClose, onDone }: Props) {
     setBusy(true);
     setResult(null);
     try {
+      const tps = [tp1, tp2, tp3, tp4].map((v) => (v ? parseFloat(v) : null));
       const res = await api.manualTrade(
         side,
         parseFloat(qty) || 0,
         sl ? parseFloat(sl) : undefined,
-        tp ? parseFloat(tp) : undefined,
+        tps,
       );
-      setResult(`✓ ${res.side} ${res.qty} @ $${res.entry.toFixed(2)} — SL ${res.sl ?? "none"} TP ${res.tp ?? "none"}`);
+      const n = res.slices?.length || 1;
+      setResult(`✓ ${res.side} ×${n} @ $${res.entry.toFixed(2)} — total qty ${res.total_qty}`);
       setTimeout(() => { onDone(); onClose(); }, 1800);
     } catch (e: any) {
       setResult(`✗ ${e.message}`);
@@ -93,21 +98,56 @@ export function ManualTradeModal({ onClose, onDone }: Props) {
               <input
                 type="number"
                 step="0.01"
-                placeholder="optional"
+                placeholder="required for SL"
                 value={sl}
                 onChange={(e) => setSl(e.target.value)}
                 className="bg-white/[0.03] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-accent/50 transition"
               />
             </label>
             <label className="flex flex-col gap-1">
-              <span className="text-[11px] uppercase tracking-wider text-gray-500">Take Profit</span>
+              <span className="text-[11px] uppercase tracking-wider text-gray-500">TP 1</span>
               <input
                 type="number"
                 step="0.01"
-                placeholder="optional"
-                value={tp}
-                onChange={(e) => setTp(e.target.value)}
+                placeholder="first target"
+                value={tp1}
+                onChange={(e) => setTp1(e.target.value)}
                 className="bg-white/[0.03] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-accent/50 transition"
+              />
+            </label>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            <label className="flex flex-col gap-1">
+              <span className="text-[11px] uppercase tracking-wider text-gray-500">TP 2</span>
+              <input
+                type="number"
+                step="0.01"
+                placeholder="opt"
+                value={tp2}
+                onChange={(e) => setTp2(e.target.value)}
+                className="bg-white/[0.03] border border-white/10 rounded-lg px-2.5 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-accent/50 transition"
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-[11px] uppercase tracking-wider text-gray-500">TP 3</span>
+              <input
+                type="number"
+                step="0.01"
+                placeholder="opt"
+                value={tp3}
+                onChange={(e) => setTp3(e.target.value)}
+                className="bg-white/[0.03] border border-white/10 rounded-lg px-2.5 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-accent/50 transition"
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-[11px] uppercase tracking-wider text-gray-500">TP 4</span>
+              <input
+                type="number"
+                step="0.01"
+                placeholder="opt"
+                value={tp4}
+                onChange={(e) => setTp4(e.target.value)}
+                className="bg-white/[0.03] border border-white/10 rounded-lg px-2.5 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-accent/50 transition"
               />
             </label>
           </div>
@@ -115,7 +155,7 @@ export function ManualTradeModal({ onClose, onDone }: Props) {
 
         {/* Hint */}
         <p className="text-[11px] text-gray-600 leading-relaxed">
-          Leave qty as 0 to auto-size from account equity and risk settings. SL/TP are attached directly to the order on Bitget.
+          Qty 0 = auto-size from equity & risk %. Fill multiple TPs to split position into equal slices (e.g. 4 TPs = 25% closes at each level), all sharing the same SL.
         </p>
 
         {/* Result */}

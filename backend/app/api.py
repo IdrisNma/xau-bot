@@ -115,8 +115,10 @@ def stats():
 async def manual_trade(payload: dict = Body(...)):
     """Place a manual market order, bypassing the strategy signal.
 
-    Body: { "side": "BUY"|"SELL", "qty": float, "sl": float|null, "tp": float|null }
-    qty=0 means auto-size from current equity using the engine's risk_pct.
+    Body: { "side": "BUY"|"SELL", "qty": float, "sl": float|null,
+            "tp": float|null,  # single TP (legacy)
+            "tps": [float, ...] }  # multi-TP: splits qty across N orders
+    qty=0 means auto-size total from current equity using risk_pct.
     """
     from .db import Trade
     from .risk import size_position
@@ -126,15 +128,24 @@ async def manual_trade(payload: dict = Body(...)):
         raise HTTPException(400, "side must be BUY or SELL")
 
     sl: float | None = float(payload["sl"]) if payload.get("sl") else None
-    tp: float | None = float(payload["tp"]) if payload.get("tp") else None
     qty_raw: float = float(payload.get("qty") or 0)
+
+    # Normalize TPs: accept either "tps" array or single "tp"
+    tps_in = payload.get("tps")
+    if isinstance(tps_in, list):
+        tps: list[float | None] = [float(x) for x in tps_in if x not in (None, "", 0)]
+    elif payload.get("tp"):
+        tps = [float(payload["tp"])]
+    else:
+        tps = [None]  # one order, no TP
+
+    n_slices = max(1, len(tps))
 
     eng = get_engine()
     price = eng.exchange.fetch_last_price()
     equity_val = eng.exchange.fetch_balance_usdt() or get_settings().leverage * 10
 
     if qty_raw <= 0:
-        # auto-size using risk_pct
         stop_price = sl if sl is not None else (price * 0.995 if side == "BUY" else price * 1.005)
         sized = size_position(
             equity=equity_val,
@@ -144,42 +155,61 @@ async def manual_trade(payload: dict = Body(...)):
         )
         if sized.qty <= 0:
             raise HTTPException(400, f"auto-sizing rejected: {sized.rejected_reason}")
-        # apply margin cap
         max_notional = equity_val * get_settings().leverage * 0.9
         if sized.notional > max_notional:
             capped = (max_notional / price // 0.001) * 0.001
             if capped < 0.001:
                 raise HTTPException(400, "insufficient margin for minimum qty")
             sized.qty = capped
-        qty = sized.qty
+        total_qty = sized.qty
     else:
-        qty = qty_raw
+        total_qty = qty_raw
 
-    try:
-        eng.exchange.market_order(side, qty, sl=sl, tp=tp)
-    except Exception as e:  # noqa: BLE001
-        raise HTTPException(500, f"order failed: {e}") from e
+    # Split total qty into n_slices, rounded down to 0.001 step. Drop slices that would be too small.
+    MIN_QTY = 0.001
+    slice_qty = (total_qty / n_slices // MIN_QTY) * MIN_QTY
+    if slice_qty < MIN_QTY:
+        # Can't split that many ways — collapse to single order with first TP only
+        slice_qty = (total_qty // MIN_QTY) * MIN_QTY
+        if slice_qty < MIN_QTY:
+            raise HTTPException(400, f"qty {total_qty} below minimum after split")
+        tps = tps[:1]
+        n_slices = 1
 
-    with Session(engine) as s:
-        tr = Trade(
-            symbol=get_settings().symbol,
-            side=side,
-            entry_price=price,
-            qty=qty,
-            sl=sl,
-            tp=tp,
-            outcome="OPEN",
-            strategy="manual",
-            reason="Manual trade via dashboard",
-        )
-        s.add(tr)
-        s.commit()
-        s.refresh(tr)
-        eng._open_trade_ids.add(tr.id)  # type: ignore[arg-type]
+    placed: list[dict] = []
+    sym = get_settings().symbol
+    for i, tp_i in enumerate(tps):
+        try:
+            eng.exchange.market_order(side, slice_qty, sl=sl, tp=tp_i)
+        except Exception as e:  # noqa: BLE001
+            raise HTTPException(500, f"order {i+1}/{n_slices} failed: {e}") from e
 
-    log_fn = logs.buy if side == "BUY" else logs.sell
-    log_fn(f"MANUAL {side} {get_settings().symbol} @ ${price:.2f} qty={qty} SL={sl} TP={tp}")
-    return {"ok": True, "side": side, "qty": qty, "entry": price, "sl": sl, "tp": tp}
+        with Session(engine) as s:
+            tr = Trade(
+                symbol=sym,
+                side=side,
+                entry_price=price,
+                qty=slice_qty,
+                sl=sl,
+                tp=tp_i,
+                outcome="OPEN",
+                strategy="manual",
+                reason=f"Manual trade {i+1}/{n_slices} via dashboard",
+            )
+            s.add(tr)
+            s.commit()
+            s.refresh(tr)
+            eng._open_trade_ids.add(tr.id)  # type: ignore[arg-type]
+            placed.append({"id": tr.id, "qty": slice_qty, "tp": tp_i})
+
+        log_fn = logs.buy if side == "BUY" else logs.sell
+        tp_str = f"${tp_i:.2f}" if tp_i else "none"
+        log_fn(f"MANUAL {side} {sym} {i+1}/{n_slices} @ ${price:.2f} qty={slice_qty} SL={sl} TP={tp_str}")
+
+    return {
+        "ok": True, "side": side, "entry": price, "sl": sl,
+        "slices": placed, "total_qty": slice_qty * n_slices,
+    }
 
 
 @router.get("/equity")
