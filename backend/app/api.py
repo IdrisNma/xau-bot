@@ -152,27 +152,40 @@ async def manual_trade(payload: dict = Body(...)):
             entry_price=price,
             stop_price=stop_price,
             risk_pct=get_settings().risk_pct,
+            min_qty=0.01,
+            qty_step=0.01,
         )
         if sized.qty <= 0:
-            raise HTTPException(400, f"auto-sizing rejected: {sized.rejected_reason}")
+            raise HTTPException(
+                400,
+                f"auto-sizing rejected ({sized.rejected_reason}). "
+                f"With equity ${equity_val:.2f}, risk {get_settings().risk_pct*100:.2f}%, "
+                f"and SL distance ${abs(price-stop_price):.2f}, no valid size. "
+                f"Type a qty manually (min 0.01, or 0.04 for 4-way split).",
+            )
         max_notional = equity_val * get_settings().leverage * 0.9
         if sized.notional > max_notional:
-            capped = (max_notional / price // 0.001) * 0.001
-            if capped < 0.001:
-                raise HTTPException(400, "insufficient margin for minimum qty")
+            capped = (max_notional / price // 0.01) * 0.01
+            if capped < 0.01:
+                raise HTTPException(400, "insufficient margin for minimum qty (0.01)")
             sized.qty = capped
         total_qty = sized.qty
     else:
         total_qty = qty_raw
 
-    # Split total qty into n_slices, rounded down to 0.001 step. Drop slices that would be too small.
-    MIN_QTY = 0.001
+    # Split total qty into n_slices, rounded down to 0.01 step. Drop slices that would be too small.
+    MIN_QTY = 0.01
     slice_qty = (total_qty / n_slices // MIN_QTY) * MIN_QTY
+    slice_qty = round(slice_qty, 2)
     if slice_qty < MIN_QTY:
         # Can't split that many ways — collapse to single order with first TP only
-        slice_qty = (total_qty // MIN_QTY) * MIN_QTY
+        slice_qty = round((total_qty // MIN_QTY) * MIN_QTY, 2)
         if slice_qty < MIN_QTY:
-            raise HTTPException(400, f"qty {total_qty} below minimum after split")
+            raise HTTPException(
+                400,
+                f"qty {total_qty} below Bitget minimum 0.01. "
+                f"Increase qty or reduce number of TPs.",
+            )
         tps = tps[:1]
         n_slices = 1
 
