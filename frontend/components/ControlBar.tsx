@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Square, Trash2, Play, ChevronDown, Check, Cpu, RotateCw } from "lucide-react";
+import { Square, Trash2, Play, ChevronDown, Check, Cpu, RotateCw, Zap } from "lucide-react";
 import clsx from "clsx";
 import { api } from "@/lib/api";
 import { StrategyBadge } from "./StrategyBadge";
@@ -13,12 +13,13 @@ const STRATEGY_DESC: Record<string, string> = {
 };
 
 export function ControlBar({
-  status, strategy, strategies, onChanged,
+  status, strategy, strategies, onChanged, onManualTrade,
 }: {
   status: string;
   strategy: string;
   strategies: string[];
   onChanged: () => void;
+  onManualTrade?: () => void;
 }) {
   const [busy, setBusy] = useState(false);
   const [picked, setPicked] = useState(strategy);
@@ -139,6 +140,15 @@ export function ControlBar({
           <Trash2 size={14} /> Reset
         </button>
       </div>
+
+      {onManualTrade && (
+        <button
+          onClick={onManualTrade}
+          className="w-full px-4 py-3 rounded-lg bg-gradient-to-r from-amber-500/20 via-yellow-500/20 to-amber-500/20 hover:from-amber-500/30 hover:via-yellow-500/30 hover:to-amber-500/30 border border-amber-500/40 text-amber-300 inline-flex items-center justify-center gap-2 text-sm font-semibold transition shadow-lg shadow-amber-500/10"
+        >
+          <Zap size={16} /> Place Manual Trade
+        </button>
+      )}
     </div>
   );
 }

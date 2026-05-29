@@ -146,6 +146,7 @@ export default function Dashboard() {
           strategy={bot.strategy}
           strategies={bot.strategies || []}
           onChanged={refresh}
+          onManualTrade={() => setShowTrade(true)}
         />
       </section>
 
