@@ -9,6 +9,7 @@ import { TradeCard } from "@/components/TradeCard";
 import { BotLogs } from "@/components/BotLogs";
 import { ControlBar } from "@/components/ControlBar";
 import { Sparkline } from "@/components/Sparkline";
+import { ManualTradeModal } from "@/components/ManualTradeModal";
 
 export default function Dashboard() {
   const [bot, setBot] = useState<any>({ strategy: "balanced", status: "stopped", strategies: [] });
@@ -16,6 +17,7 @@ export default function Dashboard() {
   const [equity, setEquity] = useState<number[]>([]);
   const [logs, setLogs] = useState<LogEvent[]>([]);
   const [wsState, setWsState] = useState<"open" | "closed">("closed");
+  const [showTrade, setShowTrade] = useState(false);
   const logsCapRef = useRef(2000);
 
   const netPnl =
@@ -83,8 +85,18 @@ export default function Dashboard() {
             <span className={clsx("live-dot", wsState !== "open" && "idle")} />
             {wsState === "open" ? "stream" : "offline"}
           </span>
+          <button
+            onClick={() => setShowTrade(true)}
+            className="inline-flex items-center gap-1.5 text-[10px] px-2.5 py-1 rounded-md border border-accent/30 bg-accent/10 text-accent uppercase tracking-wider hover:bg-accent/20 transition"
+          >
+            <Zap size={10} /> Manual
+          </button>
         </div>
       </header>
+
+      {showTrade && (
+        <ManualTradeModal onClose={() => setShowTrade(false)} onDone={refresh} />
+      )}
 
       {/* Hero: Balance + Sparkline + Control */}
       <section className="relative z-30 grid grid-cols-1 lg:grid-cols-3 gap-4 fade-up delay-1">

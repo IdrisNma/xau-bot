@@ -24,4 +24,10 @@ export const api = {
     }).then(j<any>),
   stop: () => fetch(`${API}/bot/stop`, { method: "POST", headers: authHeader() }).then(j<any>),
   remove: () => fetch(`${API}/bot`, { method: "DELETE", headers: authHeader() }).then(j<any>),
+  manualTrade: (side: "BUY" | "SELL", qty: number, sl?: number, tp?: number) =>
+    fetch(`${API}/bot/trade`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...authHeader() },
+      body: JSON.stringify({ side, qty, sl: sl ?? null, tp: tp ?? null }),
+    }).then(j<any>),
 };

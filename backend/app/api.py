@@ -111,6 +111,77 @@ def stats():
     }
 
 
+@router.post("/bot/trade", dependencies=[Depends(require_token)])
+async def manual_trade(payload: dict = Body(...)):
+    """Place a manual market order, bypassing the strategy signal.
+
+    Body: { "side": "BUY"|"SELL", "qty": float, "sl": float|null, "tp": float|null }
+    qty=0 means auto-size from current equity using the engine's risk_pct.
+    """
+    from .db import Trade
+    from .risk import size_position
+
+    side = str(payload.get("side", "")).upper()
+    if side not in ("BUY", "SELL"):
+        raise HTTPException(400, "side must be BUY or SELL")
+
+    sl: float | None = float(payload["sl"]) if payload.get("sl") else None
+    tp: float | None = float(payload["tp"]) if payload.get("tp") else None
+    qty_raw: float = float(payload.get("qty") or 0)
+
+    eng = get_engine()
+    price = eng.exchange.fetch_last_price()
+    equity_val = eng.exchange.fetch_balance_usdt() or get_settings().leverage * 10
+
+    if qty_raw <= 0:
+        # auto-size using risk_pct
+        stop_price = sl if sl is not None else (price * 0.995 if side == "BUY" else price * 1.005)
+        sized = size_position(
+            equity=equity_val,
+            entry_price=price,
+            stop_price=stop_price,
+            risk_pct=get_settings().risk_pct,
+        )
+        if sized.qty <= 0:
+            raise HTTPException(400, f"auto-sizing rejected: {sized.rejected_reason}")
+        # apply margin cap
+        max_notional = equity_val * get_settings().leverage * 0.9
+        if sized.notional > max_notional:
+            capped = (max_notional / price // 0.001) * 0.001
+            if capped < 0.001:
+                raise HTTPException(400, "insufficient margin for minimum qty")
+            sized.qty = capped
+        qty = sized.qty
+    else:
+        qty = qty_raw
+
+    try:
+        eng.exchange.market_order(side, qty, sl=sl, tp=tp)
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(500, f"order failed: {e}") from e
+
+    with Session(engine) as s:
+        tr = Trade(
+            symbol=get_settings().symbol,
+            side=side,
+            entry_price=price,
+            qty=qty,
+            sl=sl,
+            tp=tp,
+            outcome="OPEN",
+            strategy="manual",
+            reason="Manual trade via dashboard",
+        )
+        s.add(tr)
+        s.commit()
+        s.refresh(tr)
+        eng._open_trade_ids.add(tr.id)  # type: ignore[arg-type]
+
+    log_fn = logs.buy if side == "BUY" else logs.sell
+    log_fn(f"MANUAL {side} {get_settings().symbol} @ ${price:.2f} qty={qty} SL={sl} TP={tp}")
+    return {"ok": True, "side": side, "qty": qty, "entry": price, "sl": sl, "tp": tp}
+
+
 @router.get("/equity")
 def equity(limit: int = 500):
     with Session(engine) as s:
