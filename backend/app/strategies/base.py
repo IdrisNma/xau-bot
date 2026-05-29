@@ -33,6 +33,8 @@ class Preset:
     max_trades_per_day: int = 8
     require_trend_filter: bool = True   # use higher timeframe trend
     allow_counter_trend: bool = False
+    chop_threshold: float = 0.12        # EMA spread / ATR below this = HOLD
+    momo_spread_threshold: float = 0.15  # EMA spread / ATR above this = momentum signal
 
 
 class Strategy(ABC):

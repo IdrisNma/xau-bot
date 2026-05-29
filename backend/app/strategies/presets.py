@@ -20,10 +20,11 @@ PRESETS: dict[str, Preset] = {
     ),
     "aggressive": Preset(
         name="aggressive",
-        rsi_oversold=35, rsi_overbought=65,
+        rsi_oversold=40, rsi_overbought=60,
         ema_fast=5, ema_slow=13,
         atr_period=10, sl_atr_mult=1.2, tp_atr_mult=2.0,
-        max_trades_per_day=6, require_trend_filter=True, allow_counter_trend=False,
+        max_trades_per_day=12, require_trend_filter=True, allow_counter_trend=False,
+        chop_threshold=0.07, momo_spread_threshold=0.10,
     ),
 }
 

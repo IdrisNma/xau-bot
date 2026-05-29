@@ -85,7 +85,7 @@ class TAClassicStrategy(Strategy):
 
         # Avoid chop: when EMA spread is tiny relative to ATR, crossover and
         # momentum signals are mostly noise on 5m and tend to whipsaw.
-        if spread_ratio < 0.12:
+        if spread_ratio < p.chop_threshold:
             return Signal(
                 action="HOLD",
                 confidence=0.0,
@@ -93,11 +93,11 @@ class TAClassicStrategy(Strategy):
                 analysis_notes=notes,
             )
 
-        # Momentum continuation: EMA spread > 0.1*ATR (clean separation, not noise)
+        # Momentum continuation: EMA spread > threshold (clean separation, not noise)
         # AND RSI just crossed the 50 midline in trend direction. Lets the bot
         # catch trends that started before the last candle without waiting for
         # a fresh crossover that may never come.
-        clean_spread = spread_ratio > 0.15
+        clean_spread = spread_ratio > p.momo_spread_threshold
         rsi_cross_up = prev_rsi <= 50 < last_rsi
         rsi_cross_dn = prev_rsi >= 50 > last_rsi
         momo_up = above and clean_spread and rsi_cross_up
